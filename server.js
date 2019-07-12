@@ -1,15 +1,14 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+
+const adminRoutes = require('./routes/admin.routes')
+const shopRoutes = require('./routes/shop.routes')
 
 const server = express()
 
-server.use('/add-product', (req, res, next) => {
-  console.log('In another middleware!')
-  res.send('<h1>Hello!!!!!!!!!!!!!!!!</h1>')
-})
+server.use(bodyParser.urlencoded({ extended: true }))
 
-server.use('/', (req, res, next) => {
-  console.log('In another middleware!')
-  res.send('<h1>Hello!!!!!!!!!!!!!!!!</h1>')
-})
+server.use(adminRoutes)
+server.use(shopRoutes)
 
 server.listen(8080)
